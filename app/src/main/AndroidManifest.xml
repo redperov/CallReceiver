@@ -3,8 +3,10 @@
     package="com.tutorial.callreceiver">
 
     <!-- Add this permissions to use the call broadcastReceiver -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -24,20 +26,20 @@
             </intent-filter>
         </activity>
 
-
         <!-- Add this receiver to use the class that inherits from PhoneCallReceiver -->
         <receiver
             android:name=".CallReceiver"
             android:enabled="true"
-            android:exported="true"
-            >
-            <intent-filter>
+            android:exported="true">
+            <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".CallScreenActivity" android:theme="@android:style/Theme.Holo.Dialog"></activity>
     </application>
 
 </manifest>
